@@ -71,3 +71,5 @@ meson setup build \
     --prefix "$output"
 
 ninja -C build install
+
+zip -r outputs.zip $output
