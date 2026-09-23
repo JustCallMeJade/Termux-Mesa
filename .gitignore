@@ -1,2 +1,2 @@
 packages/mesa-virtio-venus/*
-!packages/mesa-virtio-venus/.build.sh
+!packages/mesa-virtio-venus/build.sh
