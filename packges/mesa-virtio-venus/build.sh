@@ -55,7 +55,7 @@ git clone --depth 1 https://github.com/JustCallMeJade/libandroid-shmem "$workdir
 
 cd "$workdir/libandroid-shmem"
 
-$CC -shared -fPIC shmem.c -o /usr/lib/libandroid-shmem.so
+$CC -shared -fPIC shmem.c -o $sysroot/usr/lib/libandroid-shmem.so
 
 cd "$workdir/mesa"
 
