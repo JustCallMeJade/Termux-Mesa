@@ -16,7 +16,7 @@ apt install git cmake wget zip unzip pkg-config patchelf -y > /dev/null
 cd "$workdir"
 
 wget https://dl.google.com/android/repository/android-ndk-r30-linux.zip &> /dev/null
-unzip android-ndk-r30-linux.zip
+unzip android-ndk-r30-linux.zip &> /dev/null
 
 export toolchain="$workdir/android-ndk-r30/toolchains/llvm/prebuilt/linux-x86_64"
 export sysroot="$toolchain/sysroot"
