@@ -18,8 +18,8 @@ cd "$workdir"
 wget https://dl.google.com/android/repository/android-ndk-r30-linux.zip &> /dev/null
 unzip android-ndk-r30-linux.zip &> /dev/null
 
-export toolchain="$workdir/android-ndk-r30/toolchains/llvm/prebuilt/linux-x86_64"
-export sysroot="$toolchain/sysroot"
+toolchain="$workdir/android-ndk-r30/toolchains/llvm/prebuilt/linux-x86_64"
+sysroot="$toolchain/sysroot"
 
 git clone https://gitlab.freedesktop.org/mesa/mesa.git "$workdir/mesa"
 
@@ -29,7 +29,7 @@ git switch --detach mesa-26.2.3
 
 git clone --depth 1 https://github.com/termux/termux-packages "$workdir/mesa/termux-packages"
 
-export TERMUX_PREFIX="/data/data/com.termux/files"
+TERMUX_PREFIX="/data/data/com.termux/files"
 
 for p in "$workdir"/mesa/termux-packages/packages/mesa/*.patch; do
     [ -e "$p" ] || continue
@@ -45,11 +45,24 @@ for p in "$workdir"/mesa/termux-packages/ndk-patches/30/*.patch; do
         patch --silent -p1 -d "$sysroot"
 done
 
-export CC="$toolchain/bin/aarch64-linux-android36-clang"
-export CXX="$toolchain/bin/aarch64-linux-android36-clang++"
-export AR="$toolchain/bin/llvm-ar"
-export STRIP="$toolchain/bin/llvm-strip"
-export LD="$toolchain/bin/ld.lld"
+cat > "$workdir/android-aarch64.txt" <<EOF
+[binaries]
+c = '$toolchain/bin/aarch64-linux-android36-clang'
+cpp = '$toolchain/bin/aarch64-linux-android36-clang++'
+ar = '$toolchain/bin/llvm-ar'
+strip = '$toolchain/bin/llvm-strip'
+ld = '$toolchain/bin/ld.lld'
+
+[properties]
+sys_root = '$sysroot'
+needs_exe_wrapper = 'true'
+
+[host_machine]
+system = 'linux'
+cpu_family = 'aarch64'
+cpu = 'aarch64'
+endian = 'little'
+EOF
 
 # git clone --depth 1 https://github.com/JustCallMeJade/libandroid-shmem "$workdir/libandroid-shmem"
 
@@ -59,10 +72,8 @@ export LD="$toolchain/bin/ld.lld"
 
 cd "$workdir/mesa"
 
-export CPPFLAGS="-D__USE_GNU"
-# export LDFLAGS="-landroid-shmem"
-
 meson setup build \
+    --cross-file "$workdir/android-aarch64.txt" \
     -Dplatforms=x11 \
     -Dxmlconfig=disabled \
     -Dllvm=disabled \
