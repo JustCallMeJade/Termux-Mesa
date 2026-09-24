@@ -74,10 +74,10 @@ cpu = 'aarch64'
 endian = 'little'
 
 [built-in options]
-c_args = '-I$workdir/mesa/shims'
-cpp_args = '-I$workdir/mesa/shims'
-c_link_args = '-I$workdir/mesa/shims'
-cpp_link_args = '-I$workdir/mesa/shims'
+c_args = '-I$workdir/mesa/shims/include'
+cpp_args = '-I$workdir/mesa/shims/include'
+c_link_args = '-I$workdir/mesa/shims/include'
+cpp_link_args = '-I$workdir/mesa/shims/include'
 
 EOF
 
