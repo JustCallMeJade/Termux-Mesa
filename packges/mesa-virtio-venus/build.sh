@@ -53,15 +53,12 @@ export TERMUX_ROOTFS="$workdir/mesa/data/data/com.termux/files/"
 
 cat > "$workdir/android-aarch64.txt" <<EOF
 [binaries]
-c = ['$toolchain/bin/aarch64-linux-android36-clang', '-D__USE_GNU', '-Wno-error']
-cpp = ['$toolchain/bin/aarch64-linux-android36-clang++', '-D__USE_GNU', '-Wno-error']
+c = ['$toolchain/bin/aarch64-linux-android36-clang', '-D__USE_GNU', '-Wno-error', '--sysroot=$sysroot']
+cpp = ['$toolchain/bin/aarch64-linux-android36-clang++', '-D__USE_GNU', '-Wno-error', '--sysroot=$sysroot']
 ar = '$toolchain/bin/llvm-ar'
 strip = '$toolchain/bin/llvm-strip'
 ld = '$toolchain/bin/ld.lld'
 pkg-config = 'pkg-config'
-
-[properties]
-sys_root = '$TERMUX_ROOTFS'
 
 [host_machine]
 system = 'linux'
@@ -87,7 +84,8 @@ meson setup build \
     -Dvulkan-drivers=virtio \
     --prefix "$output" \
     -Dvalgrind=disabled \
-    -Dzstd=disabled
+    -Dzstd=disabled \
+    -Dbuildtype=release
 
 ninja -C build install
 
