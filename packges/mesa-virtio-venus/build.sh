@@ -52,6 +52,7 @@ cpp = ['$toolchain/bin/aarch64-linux-android36-clang++', '-D__USE_GNU']
 ar = '$toolchain/bin/llvm-ar'
 strip = '$toolchain/bin/llvm-strip'
 ld = '$toolchain/bin/ld.lld'
+pkg-config = 'pkg-config'
 
 [properties]
 sys_root = '$sysroot'
