@@ -46,6 +46,9 @@ for p in "$workdir"/mesa/termux-packages/ndk-patches/30/*.patch; do
 done
 
 # wget https://github.com/JustCallMeJade/TermuxFS-RootFS/releases/download/build-20260218/termuxfs-aarch64.tar &> /dev/null
+wget https://raw.githubusercontent.com/leegao/mesa-26.2/main/shims.zip
+
+unzip shims.zip -d ./ &> /dev/null
 
 # tar -xf termuxfs-aarch64.tar
 
