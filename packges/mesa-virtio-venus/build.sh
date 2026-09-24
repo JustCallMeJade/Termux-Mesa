@@ -51,16 +51,16 @@ export AR="$toolchain/bin/llvm-ar"
 export STRIP="$toolchain/bin/llvm-strip"
 export LD="$toolchain/bin/ld.lld"
 
-git clone --depth 1 https://github.com/JustCallMeJade/libandroid-shmem "$workdir/libandroid-shmem"
+# git clone --depth 1 https://github.com/JustCallMeJade/libandroid-shmem "$workdir/libandroid-shmem"
 
-cd "$workdir/libandroid-shmem"
+# cd "$workdir/libandroid-shmem"
 
-$CC -shared -fPIC shmem.c -o $sysroot/usr/lib/libandroid-shmem.so
+# $CC -shared -fPIC shmem.c -o $sysroot/usr/lib/libandroid-shmem.so
 
 cd "$workdir/mesa"
 
 export CPPFLAGS="-D__USE_GNU"
-export LDFLAGS="-landroid-shmem"
+# export LDFLAGS="-landroid-shmem"
 
 meson setup build \
     -Dplatforms=x11 \
