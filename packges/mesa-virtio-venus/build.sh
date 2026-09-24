@@ -104,4 +104,26 @@ meson setup build \
 
 ninja -C build install
 
-zip -r outputs.zip $output
+cd $output/share/vulkan/icd.d
+
+rm -rf virtio_icd.aarch64.json
+
+cat <<'EOF' > virtio_icd.aarch64.json
+{
+  "ICD": {
+    "api_version": "1.4.354",
+    "library_arch": "64",
+    "library_path": "/data/data/com.termux/files/usr/lib/libvulkan_virtio.so"
+  },
+  "file_format_version": "1.0.1"
+}
+EOF
+
+cd ../../../
+
+rm -rf include lib/pkg-config
+rm -f lib/libexpat.so
+
+cd $workdir
+
+zip -r outputs.zip ./output
