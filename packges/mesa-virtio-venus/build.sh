@@ -76,8 +76,8 @@ endian = 'little'
 [built-in options]
 c_args = '-I$workdir/mesa/shims/include'
 cpp_args = '-I$workdir/mesa/shims/include'
-c_link_args = ['-I$workdir/mesa/shims/include', '-L$workdir/mesa/shims']
-cpp_link_args = ['-I$workdir/mesa/shims/include', '-L$workdir/mesa/shims']
+c_link_args = ['-I$workdir/mesa/shims/include', '-L$workdir/mesa/shims', '-landroid-shmem']
+cpp_link_args = ['-I$workdir/mesa/shims/include', '-L$workdir/mesa/shims', '-landroid-shmem']
 
 EOF
 
