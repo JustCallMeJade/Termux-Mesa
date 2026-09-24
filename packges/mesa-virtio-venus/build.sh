@@ -47,8 +47,8 @@ done
 
 cat > "$workdir/android-aarch64.txt" <<EOF
 [binaries]
-c = ['$toolchain/bin/aarch64-linux-android36-clang', '-D__USE_GNU']
-cpp = ['$toolchain/bin/aarch64-linux-android36-clang++', '-D__USE_GNU']
+c = ['$toolchain/bin/aarch64-linux-android36-clang', '-D__USE_GNU', '-Wno-error']
+cpp = ['$toolchain/bin/aarch64-linux-android36-clang++', '-D__USE_GNU', '-Wno-error']
 ar = '$toolchain/bin/llvm-ar'
 strip = '$toolchain/bin/llvm-strip'
 ld = '$toolchain/bin/ld.lld'
@@ -79,7 +79,8 @@ meson setup build \
     -Dllvm=disabled \
     -Dgallium-drivers= \
     -Dvulkan-drivers=virtio \
-    --prefix "$output"
+    --prefix "$output" \
+    -Dvalgrind=disabled
 
 ninja -C build install
 
