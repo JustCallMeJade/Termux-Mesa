@@ -63,11 +63,21 @@ strip = '$toolchain/bin/llvm-strip'
 ld = '$toolchain/bin/ld.lld'
 pkg-config = 'pkg-config'
 
+[properties]
+pkg_config_libdir = '$workdir/mesa/shims'
+
 [host_machine]
 system = 'linux'
 cpu_family = 'aarch64'
 cpu = 'aarch64'
 endian = 'little'
+
+[built-in options]
+c_args = '-I$workdir/mesa/shims'
+cpp_args = '-I$workdir/mesa/shims'
+c_link_args = '-I$workdir/mesa/shims'
+cpp_link_args = '-I$workdir/mesa/shims'
+
 EOF
 
 # git clone --depth 1 https://github.com/JustCallMeJade/libandroid-shmem "$workdir/libandroid-shmem"
