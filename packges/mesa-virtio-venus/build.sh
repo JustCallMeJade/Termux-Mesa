@@ -54,9 +54,6 @@ strip = '$toolchain/bin/llvm-strip'
 ld = '$toolchain/bin/ld.lld'
 pkg-config = 'pkg-config'
 
-[properties]
-sys_root = '$sysroot'
-
 [host_machine]
 system = 'linux'
 cpu_family = 'aarch64'
@@ -80,7 +77,8 @@ meson setup build \
     -Dgallium-drivers= \
     -Dvulkan-drivers=virtio \
     --prefix "$output" \
-    -Dvalgrind=disabled
+    -Dvalgrind=disabled \
+    -Dzstd=disabled
 
 ninja -C build install
 
