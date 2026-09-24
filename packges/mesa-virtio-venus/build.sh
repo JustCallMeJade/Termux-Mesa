@@ -64,6 +64,7 @@ ld = '$toolchain/bin/ld.lld'
 pkg-config = 'pkg-config'
 
 [properties]
+sys_root = '$sysroot'
 pkg_config_libdir = '$workdir/mesa/shims'
 
 [host_machine]
