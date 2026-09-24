@@ -10,8 +10,9 @@ mkdir -p "$workdir" "$output"
 sed -i 's/^Types: deb$/Types: deb deb-src/' /etc/apt/sources.list.d/ubuntu.sources
 
 apt update
-apt build-dep mesa -y > /dev/null
-apt install git cmake wget zip unzip pkg-config patchelf -y > /dev/null
+apt upgrade -y &> /dev/null
+apt build-dep mesa -y --fix-missing > /dev/null
+apt install git cmake wget zip unzip pkg-config patchelf --fix-missing -y > /dev/null
 
 cd "$workdir"
 
