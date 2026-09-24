@@ -45,11 +45,11 @@ for p in "$workdir"/mesa/termux-packages/ndk-patches/30/*.patch; do
         patch --silent -p1 -d "$sysroot"
 done
 
-wget https://github.com/JustCallMeJade/TermuxFS-RootFS/releases/download/build-20260218/termuxfs-aarch64.tar &> /dev/null
+# wget https://github.com/JustCallMeJade/TermuxFS-RootFS/releases/download/build-20260218/termuxfs-aarch64.tar &> /dev/null
 
-tar -xf termuxfs-aarch64.tar
+# tar -xf termuxfs-aarch64.tar
 
-export TERMUX_ROOTFS="$workdir/mesa/data/data/com.termux/files/"
+# export TERMUX_ROOTFS="$workdir/mesa/data/data/com.termux/files/"
 
 cat > "$workdir/android-aarch64.txt" <<EOF
 [binaries]
