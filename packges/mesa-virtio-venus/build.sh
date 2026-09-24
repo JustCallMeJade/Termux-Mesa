@@ -53,8 +53,8 @@ export TERMUX_ROOTFS="$workdir/mesa/data/data/com.termux/files/"
 
 cat > "$workdir/android-aarch64.txt" <<EOF
 [binaries]
-c = ['$toolchain/bin/aarch64-linux-android36-clang', '-D__USE_GNU', '-Wno-error', '--sysroot=$TERMUX_ROOTFS']
-cpp = ['$toolchain/bin/aarch64-linux-android36-clang++', '-D__USE_GNU', '-Wno-error', '--sysroot=$TERMUX_ROOTFS']
+c = ['$toolchain/bin/aarch64-linux-android36-clang', '-D__USE_GNU', '-Wno-error']
+cpp = ['$toolchain/bin/aarch64-linux-android36-clang++', '-D__USE_GNU', '-Wno-error']
 ar = '$toolchain/bin/llvm-ar'
 strip = '$toolchain/bin/llvm-strip'
 ld = '$toolchain/bin/ld.lld'
