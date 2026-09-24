@@ -47,15 +47,14 @@ done
 
 cat > "$workdir/android-aarch64.txt" <<EOF
 [binaries]
-c = '$toolchain/bin/aarch64-linux-android36-clang'
-cpp = '$toolchain/bin/aarch64-linux-android36-clang++'
+c = ['$toolchain/bin/aarch64-linux-android36-clang', '-D__USE_GNU']
+cpp = ['$toolchain/bin/aarch64-linux-android36-clang++', '-D__USE_GNU']
 ar = '$toolchain/bin/llvm-ar'
 strip = '$toolchain/bin/llvm-strip'
 ld = '$toolchain/bin/ld.lld'
 
 [properties]
 sys_root = '$sysroot'
-needs_exe_wrapper = 'true'
 
 [host_machine]
 system = 'linux'
