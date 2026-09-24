@@ -45,14 +45,23 @@ for p in "$workdir"/mesa/termux-packages/ndk-patches/30/*.patch; do
         patch --silent -p1 -d "$sysroot"
 done
 
+wget https://github.com/JustCallMeJade/TermuxFS-RootFS/releases/download/build-20260218/termuxfs-aarch64.tar &> /dev/null
+
+tar -xf termuxfs-aarch64.tar
+
+export TERMUX_ROOTFS="$workdir/mesa/data/data/com.termux/files/"
+
 cat > "$workdir/android-aarch64.txt" <<EOF
 [binaries]
-c = ['$toolchain/bin/aarch64-linux-android36-clang', '-D__USE_GNU', '-Wno-error']
-cpp = ['$toolchain/bin/aarch64-linux-android36-clang++', '-D__USE_GNU', '-Wno-error']
+c = ['$toolchain/bin/aarch64-linux-android36-clang', '-D__USE_GNU', '-Wno-error', '--sysroot=$TERMUX_ROOTFS']
+cpp = ['$toolchain/bin/aarch64-linux-android36-clang++', '-D__USE_GNU', '-Wno-error', '--sysroot=$TERMUX_ROOTFS']
 ar = '$toolchain/bin/llvm-ar'
 strip = '$toolchain/bin/llvm-strip'
 ld = '$toolchain/bin/ld.lld'
 pkg-config = 'pkg-config'
+
+[properties]
+sys_root = '$TERMUX_ROOTFS'
 
 [host_machine]
 system = 'linux'
