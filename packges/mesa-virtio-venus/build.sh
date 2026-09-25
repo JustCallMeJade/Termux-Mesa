@@ -61,15 +61,14 @@ c = ['$toolchain/bin/aarch64-linux-android36-clang', '-D__USE_GNU', '-Wno-error'
 cpp = ['$toolchain/bin/aarch64-linux-android36-clang++', '-D__USE_GNU', '-Wno-error', '--sysroot=$sysroot']
 ar = '$toolchain/bin/llvm-ar'
 strip = '$toolchain/bin/llvm-strip'
-c_ld = '$toolchain/bin/ld.lld'
-cpp_ld = '$toolchain/bin/ld.lld'
+ld = '$toolchain/bin/ld.lld'
 pkg-config = 'pkg-config'
 
 [properties]
 sys_root = '$sysroot'
 pkg_config_libdir = '$workdir/mesa/shims'
 
-[build_machine]
+[host_machine]
 system = 'linux'
 cpu_family = 'aarch64'
 cpu = 'aarch64'
@@ -80,6 +79,7 @@ c_args = '-I$workdir/mesa/shims/include'
 cpp_args = '-I$workdir/mesa/shims/include'
 c_link_args = ['-I$workdir/mesa/shims/include', '-L$workdir/mesa/shims', '-landroid-shmem']
 cpp_link_args = ['-I$workdir/mesa/shims/include', '-L$workdir/mesa/shims', '-landroid-shmem']
+
 EOF
 
 # git clone --depth 1 https://github.com/JustCallMeJade/libandroid-shmem "$workdir/libandroid-shmem"
@@ -95,16 +95,12 @@ meson setup build \
     -Dplatforms=x11 \
     -Dxmlconfig=disabled \
     -Dllvm=disabled \
-    -Dgallium-drivers=virgl \
-    -Dglx=dri \
-    -Dgbm=enabled \
-    -Dvulkan-beta=true \
+    -Dgallium-drivers= \
     -Dvulkan-drivers=virtio \
     --prefix "$output" \
     -Dvalgrind=disabled \
     -Dzstd=disabled \
-    -Dbuildtype=release \
-    -Dexpat=disabled
+    -Dbuildtype=release
 
 ninja -C build install
 
@@ -123,10 +119,10 @@ cat <<'EOF' > virtio_icd.aarch64.json
 }
 EOF
 
-# cd ../../../
+cd ../../../
 
-# rm -rf include lib/pkg-config
-# rm -f lib/libexpat.so
+rm -rf include lib/pkg-config
+rm -f lib/libexpat.so
 
 cd $workdir
 
