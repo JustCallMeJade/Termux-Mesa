@@ -100,7 +100,8 @@ meson setup build \
     --prefix "$output" \
     -Dvalgrind=disabled \
     -Dzstd=disabled \
-    -Dbuildtype=release
+    -Dbuildtype=release \
+    -Dexpat=disabled
 
 ninja -C build install
 
@@ -119,10 +120,10 @@ cat <<'EOF' > virtio_icd.aarch64.json
 }
 EOF
 
-cd ../../../
+# cd ../../../
 
-rm -rf include lib/pkg-config
-rm -f lib/libexpat.so
+# rm -rf include lib/pkg-config
+# rm -f lib/libexpat.so
 
 cd $workdir
 
