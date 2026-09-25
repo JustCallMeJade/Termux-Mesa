@@ -47,7 +47,7 @@ for p in "$workdir"/mesa/termux-packages/ndk-patches/30/*.patch; do
 done
 
 # wget https://github.com/JustCallMeJade/TermuxFS-RootFS/releases/download/build-20260218/termuxfs-aarch64.tar &> /dev/null
-wget https://raw.githubusercontent.com/JustCallMeJade/Random/main/shims.zip
+wget https://raw.githubusercontent.com/leegao/mesa-26.2/main/shims.zip
 
 unzip shims.zip -d ./ &> /dev/null
 
@@ -61,7 +61,8 @@ c = ['$toolchain/bin/aarch64-linux-android36-clang', '-D__USE_GNU', '-Wno-error'
 cpp = ['$toolchain/bin/aarch64-linux-android36-clang++', '-D__USE_GNU', '-Wno-error', '--sysroot=$sysroot']
 ar = '$toolchain/bin/llvm-ar'
 strip = '$toolchain/bin/llvm-strip'
-ld = '$toolchain/bin/ld.lld'
+c_ld = '$toolchain/bin/ld.lld'
+cpp_ld = '$toolchain/bin/ld.lld'
 pkg-config = 'pkg-config'
 
 [properties]
@@ -95,12 +96,16 @@ meson setup build \
     -Dplatforms=x11 \
     -Dxmlconfig=disabled \
     -Dllvm=disabled \
-    -Dgallium-drivers= \
+    -Dgallium-drivers=virgl \
+    -Dglx=dri \
+    -Dgbm=enabled \
+    -Dvulkan-beta=true \
     -Dvulkan-drivers=virtio \
     --prefix "$output" \
     -Dvalgrind=disabled \
     -Dzstd=disabled \
-    -Dbuildtype=release
+    -Dbuildtype=release \
+    -Dexpat=disabled
 
 ninja -C build install
 
