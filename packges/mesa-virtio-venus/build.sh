@@ -69,7 +69,7 @@ pkg-config = 'pkg-config'
 sys_root = '$sysroot'
 pkg_config_libdir = '$workdir/mesa/shims'
 
-[host_machine]
+[build_machine]
 system = 'linux'
 cpu_family = 'aarch64'
 cpu = 'aarch64'
@@ -80,7 +80,6 @@ c_args = '-I$workdir/mesa/shims/include'
 cpp_args = '-I$workdir/mesa/shims/include'
 c_link_args = ['-I$workdir/mesa/shims/include', '-L$workdir/mesa/shims', '-landroid-shmem']
 cpp_link_args = ['-I$workdir/mesa/shims/include', '-L$workdir/mesa/shims', '-landroid-shmem']
-
 EOF
 
 # git clone --depth 1 https://github.com/JustCallMeJade/libandroid-shmem "$workdir/libandroid-shmem"
