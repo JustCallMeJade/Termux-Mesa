@@ -27,5 +27,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: mesa-virtio-venus
-          path: packges/mesa-virtio-venus/workdir/mesa/outputs.zip
+          path: packges/mesa-virtio-venus/workdir/outputs.zip
           if-no-files-found: error
