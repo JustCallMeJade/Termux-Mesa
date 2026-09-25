@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -euo pipefail
+set -exuo pipefail
 
 workdir="$(pwd)/workdir"
 output="$workdir/output"
